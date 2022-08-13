@@ -9,10 +9,10 @@ export class MongoDBBilletDataSource implements IBilletDataSource {
     this.db = db;
   }
   async create(billet: Billet) {
-    await this.db.insertOne(billet, { _id: 0 });
+    await this.db.insertOne(billet);
   }
   async getOne(uuid: string): Promise<Billet> {
-    const result = await this.db.find({ uuid: uuid }, { _id: 0 });
+    const result = await this.db.find({ uuid: uuid });
     const billet: Billet = result.map((item) => ({
       uuid: item.uuid.toString(),
       billet: item.billet,

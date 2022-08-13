@@ -5,7 +5,7 @@ export enum PaymentStatus {
 }
 
 export interface Billet {
-    uuid: string;
+    uuid?: string;
     billet: string;
     amount: number;
     paymentStatus: PaymentStatus,

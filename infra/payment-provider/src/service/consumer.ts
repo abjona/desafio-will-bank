@@ -45,7 +45,6 @@ export class ConsumerMessagePaymentBillet extends KafkaConfig {
   async proccessMessage(paymentMessage: IPaymentBilletMessage) {
     if (paymentMessage) {
       const data = await this.paymentBilletUseCase.execute(paymentMessage);
-      console.log("aqui1", data);
 
       if (data) {
         const test = {
@@ -54,7 +53,6 @@ export class ConsumerMessagePaymentBillet extends KafkaConfig {
           transactiondId: data?.transactiondId,
           updatedDate: new Date(),
         };
-        console.log("aqui2", test);
 
         await this.updateBilletUseCase.execute(paymentMessage.uuid, {
           paymentStatus: PaymentStatus.SUCCESS,

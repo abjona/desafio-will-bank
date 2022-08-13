@@ -40,6 +40,7 @@ describe("Billet router", () => {
   describe("POST /billet", () => {
     test("POST /billet", async () => {
       const inputData: Billet = {
+        uuid: "test123",
         amount: 32.2,
         billet: "12e9180edfj30819089022",
         paymentStatus: PaymentStatus.PENDING,
@@ -86,7 +87,7 @@ describe("Billet router", () => {
         .spyOn(mockGetBilletUseCase, "execute")
         .mockImplementation(() => Promise.resolve(returnData));
 
-      const response = await request(server).get("/billet/1234");
+      const response = await request(server).get("/billet/test123");
       expect(response.status).toBe(200);
       expect(mockGetBilletUseCase.execute).toBeCalledTimes(1);
       expect({
@@ -96,14 +97,14 @@ describe("Billet router", () => {
       }).toStrictEqual(returnData);
     });
 
-    test("should return 500 on case error", async () => {
+    test("should return 404 on case error", async () => {
       jest
         .spyOn(mockGetBilletUseCase, "execute")
         .mockImplementation(() => Promise.reject(Error()));
 
       const response = await request(server).get("/billet/1234");
-      expect(response.status).toBe(500);
-      expect(response.body).toStrictEqual({ message: "error get" });
+      expect(response.status).toBe(404);
+      expect(response).toStrictEqual({ message: "not found" });
     });
   });
 });

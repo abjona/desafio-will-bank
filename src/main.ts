@@ -17,9 +17,8 @@ async function getMongoDS() {
   const db = client.db("BILLET_DB");
 
   const connectDatabase: NoSQLDatabaseWrapper = {
-    find: (query, config) =>
-      db.collection("billets").find(query, config).toArray(),
-    insertOne: (doc, config) => db.collection("billets").insertOne(doc, config),
+    find: (query) => db.collection("billets").find(query).toArray(),
+    insertOne: (doc) => db.collection("billets").insertOne(doc),
   };
 
   return new MongoDBBilletDataSource(connectDatabase);

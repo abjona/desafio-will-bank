@@ -4,6 +4,7 @@ import {
 } from "../../../../src/domain/models/billet";
 import { IBilletRepository } from "../../../../src/domain/interfaces/repositories/billet-repository";
 import { CreateBilletUseCase } from "../../../../src/domain/use-cases/billet/create-billet";
+import { ProducerMessagePaymentBillet } from "../../../../src/domain/services/events/kafka/producer";
 
 describe("Create Billet Use Case", () => {
   class MockCreateBillet implements IBilletRepository {
@@ -31,7 +32,8 @@ describe("Create Billet Use Case", () => {
     jest
       .spyOn(mockBilletRepository, "createBillet")
       .mockImplementation(() => Promise.resolve(inputData));
-    const createBilletUseCase = new CreateBilletUseCase(mockBilletRepository);
+    const producerMessagePaymentBillet = new ProducerMessagePaymentBillet();
+    const createBilletUseCase = new CreateBilletUseCase(mockBilletRepository, producerMessagePaymentBillet);
     await createBilletUseCase.execute(inputData);
     expect(mockBilletRepository.createBillet).toBeCalledTimes(1);
   });

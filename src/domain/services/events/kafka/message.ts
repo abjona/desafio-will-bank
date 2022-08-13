@@ -1,5 +1,5 @@
 export interface IPaymentBilletMessage {
-  uuid: string;
+  uuid?: string;
   billet: string;
   amount: number;
 }
