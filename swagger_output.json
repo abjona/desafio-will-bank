@@ -1,0 +1,170 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Desafio Will-Bank",
+    "description": "Documentação da api de pagamento de boleto."
+  },
+  "host": "localhost:4000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Billet",
+      "description": "pagamento de boletos"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "apiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-API-KEY",
+      "description": "any description..."
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/billet/{uuid}": {
+      "get": {
+        "tags": [
+          "Billet"
+        ],
+        "description": "get billet",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User registered successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResponseBillet"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/billet": {
+      "post": {
+        "tags": [
+          "Billet"
+        ],
+        "description": "billet",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "User information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateBillet"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Billet": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "example": "cab71db2-9fc0-4fd8-92a3-22e554dabc3c"
+        },
+        "amount": {
+          "type": "number",
+          "example": 12.5
+        },
+        "billet": {
+          "type": "string",
+          "example": "826500000011323116990009002022153320476101001040"
+        },
+        "paymentStatus": {
+          "type": "string",
+          "example": "pending"
+        },
+        "createdDate": {
+          "type": "string",
+          "example": "2022-08-13T04:20:08.770Z"
+        },
+        "updatedDate": {
+          "type": "string",
+          "example": "2022-08-13T04:20:08.770Z"
+        }
+      }
+    },
+    "CreateBillet": {
+      "type": "object",
+      "properties": {
+        "billet": {
+          "type": "string",
+          "example": "826500000011323116990009002022153320476101001040"
+        },
+        "amount": {
+          "type": "number",
+          "example": 12.5
+        }
+      },
+      "required": [
+        "billet",
+        "amount"
+      ]
+    },
+    "ResponseBillet": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "example": "5117773c-b3f8-4b9c-bc57-dd68b7814842"
+        },
+        "billet": {
+          "type": "string",
+          "example": "826500000011323116990009002022153320476101001040"
+        },
+        "amount": {
+          "type": "number",
+          "example": 12.5
+        },
+        "paymentStatus": {
+          "type": "string",
+          "example": "success"
+        },
+        "createdDate": {
+          "type": "string",
+          "example": "2022-08-13T03:52:27.340Z"
+        },
+        "updatedDate": {
+          "type": "string",
+          "example": "2022-08-13T03:52:28.596Z"
+        }
+      }
+    }
+  }
+}
