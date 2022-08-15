@@ -54,7 +54,7 @@ Com o Kafdrop é possivel visualizar as mensagens enviadas pela api, basta acess
 
 ## Environments
 
-Para a conexão com banco de dados é necessário a criação de um arquivo .env na raiz do projeto com as seguintes informações:
+Para a conexão com banco de dados e com o cluster kafka é necessário a criação de um arquivo .env na raiz do projeto com as seguintes informações:
 
 - DB_HOST=localhost
 - DB_USER=admin
