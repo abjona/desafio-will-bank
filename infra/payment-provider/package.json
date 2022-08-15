@@ -8,7 +8,8 @@
     "start": "node dist/main.js",
     "dev": "tsnd --transpile-only --respawn --ignore-watch node_modules src/main.ts",
     "dev:serve": "tsc && nodemon -e js -w lib dist/main.js",
-    "infra:up": "cd ../ && docker-compose up -d"
+    "infra:up": "cd ../ && docker-compose up -d",
+    "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +17,7 @@
     "@types/express": "^4.17.13",
     "@types/mongodb": "^4.0.7",
     "@types/node": "^18.7.2",
+    "prettier": "^2.7.1",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.7.4"
