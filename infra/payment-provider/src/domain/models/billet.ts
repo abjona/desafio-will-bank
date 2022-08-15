@@ -5,7 +5,7 @@ export enum PaymentStatus {
 }
 
 export interface BilletUpdated {
-    transactiondId: string,
+    transactionId: string,
     paymentStatus: PaymentStatus,
     updatedDate: Date;
 }

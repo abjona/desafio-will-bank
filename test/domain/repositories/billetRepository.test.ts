@@ -27,6 +27,7 @@ describe("Billet Repository", () => {
       const inputData: Billet = {
         amount: 32.2,
         billet: "12e9180edfj30819089022",
+        transactionId: "",
         paymentStatus: PaymentStatus.PENDING,
         createdDate: new Date(),
         updatedDate: new Date(),
@@ -48,6 +49,7 @@ describe("Billet Repository", () => {
       const returnData: Billet = {
         amount: 32.2,
         billet: "12e9180edfj30819089022",
+        transactionId: "",
         paymentStatus: PaymentStatus.PENDING,
         createdDate: new Date(),
         updatedDate: new Date(),

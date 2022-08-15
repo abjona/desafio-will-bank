@@ -24,6 +24,7 @@ export class CreateBilletUseCase implements ICreateBilletUseCase {
       uuid: uuidv4(),
       amount: billet.amount,
       billet: billet.billet,
+      transactionId: "",
       paymentStatus: PaymentStatus.PENDING,
       createdDate: new Date(),
       updatedDate: new Date(),

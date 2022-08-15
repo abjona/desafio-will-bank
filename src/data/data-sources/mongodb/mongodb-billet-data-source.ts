@@ -15,9 +15,10 @@ export class MongoDBBilletDataSource implements IBilletDataSource {
     const result = await this.db.find({ uuid: uuid });
     const billet: Billet = result.map((item) => ({
       uuid: item.uuid.toString(),
+      transactionId: item.transactionId,
       billet: item.billet,
-      amount: item.amount,
       paymentStatus: item.paymentStatus,
+      amount: item.amount,
       createdDate: item.createdDate,
       updatedDate: item.updatedDate,
     }))[0];

@@ -9,6 +9,7 @@ describe("MongoDB DataSource", () => {
     uuid: "1234",
     amount: 23.8,
     billet: "dh839ry23r23",
+    transactionId: "",
     paymentStatus: PaymentStatus.PENDING,
     createdDate: new Date(),
     updatedDate: new Date(),

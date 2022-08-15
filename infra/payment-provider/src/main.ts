@@ -8,7 +8,7 @@ import { ConsumerMessagePaymentBillet } from "./service/consumer";
 
 async function getMongoDS() {
   const uri =
-    "mongodb://admin:123@localhost:27017?retryWrites=true&writeConcern=majority";
+    "mongodb://admin:123@mongodb:27017?retryWrites=true&writeConcern=majority";
 
   const client: MongoClient = new MongoClient(uri);
   await client.connect();
@@ -24,7 +24,7 @@ async function getMongoDS() {
             $set: {
               paymentStatus: data.paymentStatus,
               updatedDate: data.updatedDate,
-              transactiondId: data.transactiondId
+              transactionId: data.transactionId
             },
           }
         ),
@@ -43,6 +43,5 @@ async function getMongoDS() {
     paymentBilletUseCase,
     updateBilletUseCase
   );
-  console.log("Starting consumer...");
   consumer.consumeMessage();
 })();

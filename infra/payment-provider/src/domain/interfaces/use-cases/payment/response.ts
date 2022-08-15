@@ -1,3 +1,3 @@
 export interface IResponsePayment {
-  transactiondId: string;
+  transactionId: string;
 }

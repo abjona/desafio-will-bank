@@ -19,7 +19,7 @@ export default function BilletRouters(
       // #swagger.description = 'get billet'
 
       const { uuid } = req.params;
-      const billet = await getBilletUseCase.execute(uuid);
+      const billet : BilletResponseModel | null= await getBilletUseCase.execute(uuid);
 
       /* #swagger.responses[200] = { 
           schema: { "$ref": "#/definitions/ResponseBillet" },

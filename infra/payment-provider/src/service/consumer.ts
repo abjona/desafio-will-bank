@@ -2,12 +2,12 @@ import { IPaymentBilletMessage } from "../domain/interfaces/use-cases/payment/me
 import { IPaymentBilletUseCase } from "../domain/interfaces/use-cases/payment/payment-billet";
 import { IUpdateBilletUseCase } from "../domain/interfaces/use-cases/payment/update-billet";
 import { PaymentStatus } from "../domain/models/billet";
-
 import { KafkaConfig } from "./kafka";
 
 export class ConsumerMessagePaymentBillet extends KafkaConfig {
   paymentBilletUseCase: IPaymentBilletUseCase;
   updateBilletUseCase: IUpdateBilletUseCase;
+  transactionId: string;
   constructor(
     paymentBilletUseCase: IPaymentBilletUseCase,
     updateBilletUseCase: IUpdateBilletUseCase
@@ -15,57 +15,42 @@ export class ConsumerMessagePaymentBillet extends KafkaConfig {
     super();
     this.paymentBilletUseCase = paymentBilletUseCase;
     this.updateBilletUseCase = updateBilletUseCase;
+    this.transactionId = "";
   }
   async consumeMessage() {
-    const consumer = this.kafka.consumer({
-      groupId: this.clientId,
-      minBytes: 5,
-      maxBytes: 1e6,
-      maxWaitTimeInMs: 3000,
+    this.consumer.on("message", async (message: any) => {
+      console.log("message: ", JSON.parse(message.value));
+      await this.proccessMessage(JSON.parse(message.value));
     });
 
-    await consumer.connect();
-    await consumer.subscribe({ topic: this.topic, fromBeginning: true });
-    await consumer.run({
-      eachMessage: async ({ message }: any) => {
-        try {
-          console.log(`received message: ${message.value}`);
-
-          const paymentMessage: IPaymentBilletMessage = JSON.parse(
-            message.value
-          );
-          await this.proccessMessage(paymentMessage);
-        } catch (error) {
-          console.log(error);
-        }
-      },
+    this.consumer.on("error", (error) => {
+      console.log(error)
     });
   }
 
   async proccessMessage(paymentMessage: IPaymentBilletMessage) {
-    if (paymentMessage) {
-      const data = await this.paymentBilletUseCase.execute(paymentMessage);
+    try {
+      if (paymentMessage) {
+        const transactionId = await this.paymentBilletUseCase.execute(
+          paymentMessage
+        );
 
-      if (data) {
-        const test = {
-          uuid: paymentMessage.uuid,
-          paymentStatus: PaymentStatus.SUCCESS,
-          transactiondId: data?.transactiondId,
-          updatedDate: new Date(),
-        };
-
-        await this.updateBilletUseCase.execute(paymentMessage.uuid, {
-          paymentStatus: PaymentStatus.SUCCESS,
-          transactiondId: data?.transactiondId,
-          updatedDate: new Date(),
-        });
-      } else {
-        await this.updateBilletUseCase.execute(paymentMessage.uuid, {
-          paymentStatus: PaymentStatus.FAIL,
-          transactiondId: "",
-          updatedDate: new Date(),
-        });
+        if (transactionId) {
+          await this.updateBilletUseCase.execute(paymentMessage.uuid, {
+            paymentStatus: PaymentStatus.SUCCESS,
+            transactionId: transactionId,
+            updatedDate: new Date(),
+          });
+        } else {
+          await this.updateBilletUseCase.execute(paymentMessage.uuid, {
+            paymentStatus: PaymentStatus.FAIL,
+            transactionId: "",
+            updatedDate: new Date(),
+          });
+        }
       }
+    } catch (error) {
+      console.log("error processing message\n", paymentMessage);
     }
   }
 }

@@ -6,8 +6,8 @@ services:
     container_name: node-consumer
     build: './payment-provider'
     depends_on:
-      - mongodb
       - kafka
+      - mongodb
     networks: 
       - host-container
     

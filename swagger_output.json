@@ -17,14 +17,6 @@
     "http",
     "https"
   ],
-  "securityDefinitions": {
-    "apiKeyAuth": {
-      "type": "apiKey",
-      "in": "header",
-      "name": "X-API-KEY",
-      "description": "any description..."
-    }
-  },
   "consumes": [
     "application/json"
   ],
@@ -98,17 +90,21 @@
           "type": "string",
           "example": "cab71db2-9fc0-4fd8-92a3-22e554dabc3c"
         },
-        "amount": {
-          "type": "number",
-          "example": 12.5
-        },
         "billet": {
           "type": "string",
           "example": "826500000011323116990009002022153320476101001040"
         },
+        "transactionId": {
+          "type": "string",
+          "example": ""
+        },
         "paymentStatus": {
           "type": "string",
           "example": "pending"
+        },
+        "amount": {
+          "type": "number",
+          "example": 12.5
         },
         "createdDate": {
           "type": "string",
@@ -148,13 +144,17 @@
           "type": "string",
           "example": "826500000011323116990009002022153320476101001040"
         },
-        "amount": {
-          "type": "number",
-          "example": 12.5
+        "transactionId": {
+          "type": "string",
+          "example": ""
         },
         "paymentStatus": {
           "type": "string",
           "example": "success"
+        },
+        "amount": {
+          "type": "number",
+          "example": 12.5
         },
         "createdDate": {
           "type": "string",

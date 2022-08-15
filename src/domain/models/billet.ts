@@ -5,17 +5,18 @@ export enum PaymentStatus {
 }
 
 export interface Billet {
-    uuid?: string;
-    billet: string;
-    amount: number;
+    uuid?: string,
+    billet: string,
+    amount: number,
     paymentStatus: PaymentStatus,
-    createdDate: Date;
-    updatedDate: Date;
+    transactionId: string,
+    createdDate: Date,
+    updatedDate: Date
 }
 
 export interface BilletRequestModel {
-    billet: string;
-    amount: number;
+    billet: string,
+    amount: number,
 }
 
 export interface BilletResponseModel extends Omit<Billet, "billet"> {}
