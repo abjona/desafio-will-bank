@@ -17,3 +17,26 @@ A solução encontrada é exemplificada no seguinte fluxo abaixo:
     - Mock responsável por simular a resposta do pagamento de um boleto.
 - BILLET-DB
     - Banco de dados responsável por armazenar as informações referentes ao pagamento dos boletos.
+
+## Instalação
+
+Instalação dos pacotes da api:
+
+```bash
+  npm install
+```
+
+Subindo a infra para o funcionamento da api:
+
+```bash
+  npm run infra:up
+```
+Rodando a api:
+
+```bash
+  npm run dev
+```
+## Documentação da api
+
+* A api conta com a documentação dos endpoint feita com swagger, na qual pode ser consultada acessando **localhost:4000/doc/** 
+* Para facilitar o consumo da API foi feito exportada uma collection que pode ser consumida via postman, ela se encontra na pasta **./docs**
