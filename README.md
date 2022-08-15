@@ -36,6 +36,11 @@ Rodando a api:
 ```bash
   npm run dev
 ```
+## Visualizando mensagens
+
+Com o Kafdrop é possivel visualizar as mensagens enviadas pela api, basta acessar **localhost:19000** e selecionar o topic *billet*, segue abaixo como fica a visualização:
+
+![Kafdrop Screenshot](./screenshots/vis_mens.png)
 ## Documentação da api
 
 * A api conta com a documentação dos endpoint feita com swagger, na qual pode ser consultada acessando **localhost:4000/doc/** 
