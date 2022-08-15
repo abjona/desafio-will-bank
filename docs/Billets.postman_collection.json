@@ -1,55 +1,55 @@
 {
-	"variables": [],
-	"info": {
-		"name": "Billets",
-		"_postman_id": "14093cda-a924-2390-55f8-de4ffd135f68",
-		"description": "",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "/billet/{uuid}",
-			"request": {
-				"url": "localhost:4000/billet",
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "/billet",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"var jsonData = JSON.parse(responseBody);",
-							"",
-							"postman.setEnvironmentVariable(\"uuid\", jsonData.uuid);"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "localhost:4000/billet",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"billet\": \"826500000011323116990009002022153320476101001040\",\n\t\"amount\": 12.5\n}"
-				},
-				"description": ""
-			},
-			"response": []
-		}
-	]
+  "variables": [],
+  "info": {
+    "name": "Billets",
+    "_postman_id": "14093cda-a924-2390-55f8-de4ffd135f68",
+    "description": "",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "/billet/{uuid}",
+      "request": {
+        "url": "localhost:4000/billet",
+        "method": "GET",
+        "header": [],
+        "body": {},
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "name": "/billet",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var jsonData = JSON.parse(responseBody);",
+              "",
+              "postman.setEnvironmentVariable(\"uuid\", jsonData.uuid);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "url": "localhost:4000/billet",
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "description": ""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"billet\": \"826500000011323116990009002022153320476101001040\",\n\t\"amount\": 12.5\n}"
+        },
+        "description": ""
+      },
+      "response": []
+    }
+  ]
 }

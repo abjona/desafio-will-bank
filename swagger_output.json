@@ -13,22 +13,13 @@
       "description": "pagamento de boletos"
     }
   ],
-  "schemes": [
-    "http",
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["http", "https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/billet/{uuid}": {
       "get": {
-        "tags": [
-          "Billet"
-        ],
+        "tags": ["Billet"],
         "description": "get billet",
         "parameters": [
           {
@@ -40,25 +31,17 @@
         ],
         "responses": {
           "200": {
-            "description": "User registered successfully.",
             "schema": {
               "$ref": "#/definitions/ResponseBillet"
-            }
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+            },
+            "description": "get information success."
           }
         }
       }
     },
     "/billet": {
       "post": {
-        "tags": [
-          "Billet"
-        ],
+        "tags": ["Billet"],
         "description": "billet",
         "parameters": [
           {
@@ -73,10 +56,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
-          },
-          "500": {
-            "description": "Internal Server Error"
+            "schema": {
+              "$ref": "#/definitions/ResponseBillet"
+            },
+            "description": "billet accepted."
           }
         }
       }
@@ -128,10 +111,7 @@
           "example": 12.5
         }
       },
-      "required": [
-        "billet",
-        "amount"
-      ]
+      "required": ["billet", "amount"]
     },
     "ResponseBillet": {
       "type": "object",

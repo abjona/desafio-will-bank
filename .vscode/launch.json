@@ -1,34 +1,30 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "args": [],
-            "cwd": "${workspaceRoot}",
-            "env": {
-                "NODE_ENV": "development"
-            },
-            "externalConsole": false,
-            "name": "DEBUG",
-            "outDir": "${workspaceRoot}/dist",
-            "preLaunchTask": "compile",
-            "program": "${workspaceRoot}/src/main.ts",
-            "outFiles": [
-                "${workspaceRoot}/dist/main.js"
-              ],
-            "request": "launch",
-            "runtimeArgs": [
-                "--nolazy"
-            ],
-            "runtimeExecutable": null,
-            "sourceMaps": true,
-            "stopOnEntry": false,
-            "type": "node"
-        },
-        {
-            "name": "Attach",
-            "type": "node",
-            "request": "attach",
-            "port": 5858
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "args": [],
+      "cwd": "${workspaceRoot}",
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "externalConsole": false,
+      "name": "DEBUG",
+      "outDir": "${workspaceRoot}/dist",
+      "preLaunchTask": "compile",
+      "program": "${workspaceRoot}/src/main.ts",
+      "outFiles": ["${workspaceRoot}/dist/main.js"],
+      "request": "launch",
+      "runtimeArgs": ["--nolazy"],
+      "runtimeExecutable": null,
+      "sourceMaps": true,
+      "stopOnEntry": false,
+      "type": "node"
+    },
+    {
+      "name": "Attach",
+      "type": "node",
+      "request": "attach",
+      "port": 5858
+    }
+  ]
 }

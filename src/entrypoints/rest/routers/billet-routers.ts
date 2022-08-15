@@ -1,42 +1,55 @@
-import express from "express";
-import { Request, Response } from "express";
-import { ICreateBilletUseCase } from "../../../domain/interfaces/use-cases/create-billet";
-import { IGetBilletUseCase } from "../../../domain/interfaces/use-cases/get-billet";
+import express from 'express'
+import { Request, Response } from 'express'
+import { ICreateBilletUseCase } from '../../../domain/interfaces/use-cases/create-billet'
+import { IGetBilletUseCase } from '../../../domain/interfaces/use-cases/get-billet'
+import {
+  ReasonPhrases,
+  StatusCodes,
+} from 'http-status-codes'
 import {
   BilletRequestModel,
   BilletResponseModel,
-} from "../../../domain/models/billet";
+} from '../../../domain/models/billet'
 
 export default function BilletRouters(
   createBilletUseCase: ICreateBilletUseCase,
   getBilletUseCase: IGetBilletUseCase
 ) {
-  const router = express.Router();
+  const router = express.Router()
 
-  router.get("/billet/:uuid", async (req: Request, res: Response) => {
+  router.get('/billet/:uuid', async (req: Request, res: Response) => {
     try {
       // #swagger.tags = ['Billet']
       // #swagger.description = 'get billet'
 
-      const { uuid } = req.params;
-      const billet : BilletResponseModel | null= await getBilletUseCase.execute(uuid);
+      const { uuid } = req.params
+      const billet: BilletResponseModel | null = await getBilletUseCase.execute(
+        uuid
+      )
 
-      /* #swagger.responses[200] = { 
+      /* #swagger.responses[200] = {
           schema: { "$ref": "#/definitions/ResponseBillet" },
-          description: "User registered successfully." } 
+          description: "get information success." }
       */
 
-      if (billet) res.status(200).send(billet);
-      else res.status(404).send({ message: "not found" });
+      if (billet) {
+        res.status(StatusCodes.OK).send(billet)
+      } else {
+        res
+          .status(StatusCodes.NOT_FOUND)
+          .send({ uuid, message: ReasonPhrases.NOT_FOUND })
+      }
     } catch (err) {
-      res.status(500).send({ message: "error get" });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .send({ message: ReasonPhrases.INTERNAL_SERVER_ERROR })
     }
-  });
+  })
 
-  router.post("/billet", async (req: Request, res: Response) => {
+  router.post('/billet', async (req: Request, res: Response) => {
     try {
       /* 	#swagger.tags = ['Billet']
-          #swagger.description = 'billet' 
+          #swagger.description = 'billet'
       */
 
       /*	#swagger.parameters['obj'] = {
@@ -44,16 +57,23 @@ export default function BilletRouters(
             description: 'User information.',
             required: true,
             schema: { $ref: "#/definitions/CreateBillet" }
-          } 
+          }
       */
-      const billet: BilletRequestModel = req.body;
-      const billetCreated: BilletResponseModel | null =
-        await createBilletUseCase.execute(billet);
-      res.status(202).send(billetCreated);
-    } catch (err) {
-      res.status(500).send({ message: "error saving" });
-    }
-  });
 
-  return router;
+      /* #swagger.responses[202] = {
+          schema: { "$ref": "#/definitions/ResponseBillet" },
+          description: "billet accepted." }
+      */
+      const billet: BilletRequestModel = req.body
+      const billetCreated: BilletResponseModel | null =
+        await createBilletUseCase.execute(billet)
+      res.status(StatusCodes.ACCEPTED).send(billetCreated)
+    } catch (err) {
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .send({ message: ReasonPhrases.INTERNAL_SERVER_ERROR })
+    }
+  })
+
+  return router
 }

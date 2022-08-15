@@ -7,14 +7,14 @@ import {
   BilletResponseModel,
 } from "../../models/billet";
 import { v4 as uuidv4 } from "uuid";
-import { ProducerMessagePaymentBillet } from "../../services/events/kafka/producer";
+import { IProducer } from "../../interfaces/services/events/kafka/producer";
 
 export class CreateBilletUseCase implements ICreateBilletUseCase {
   billetRepository: IBilletRepository;
-  producerMessagePaymentBillet: ProducerMessagePaymentBillet;
+  producerMessagePaymentBillet: IProducer;
   constructor(
     billetRepository: IBilletRepository,
-    producerMessagePaymentBillet: ProducerMessagePaymentBillet
+    producerMessagePaymentBillet: IProducer
   ) {
     this.billetRepository = billetRepository;
     this.producerMessagePaymentBillet = producerMessagePaymentBillet;
